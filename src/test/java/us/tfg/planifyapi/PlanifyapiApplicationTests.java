@@ -1,4 +1,4 @@
-package com.planifyapi.planifyapi;
+package us.tfg.planifyapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
