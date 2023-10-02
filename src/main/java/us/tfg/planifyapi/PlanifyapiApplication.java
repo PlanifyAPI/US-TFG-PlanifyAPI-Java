@@ -1,4 +1,4 @@
-package com.planifyapi.planifyapi;
+package us.tfg.planifyapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
