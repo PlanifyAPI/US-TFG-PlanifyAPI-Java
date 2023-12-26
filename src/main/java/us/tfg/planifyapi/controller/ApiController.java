@@ -12,16 +12,11 @@ public class ApiController {
 
     @Autowired
     private YoutubeService youtubeService;
-
+    
     @GetMapping("/youtube")
     public String getYoutubeData() {
-        // Lógica para llamar a la API de YouTube usando youtubeService
-        return youtubeService.fetchYoutubeData();
+        String rateLimit = "10000/1440min";
+        return youtubeService.fetchYoutubeData(rateLimit);
     }
 
-    @GetMapping("/example")
-    public String getExampleData() {
-        // Lógica para llamar a la API de YouTube usando youtubeService
-        return "Datos de ejemplo obtenidos";
-    }
 }
