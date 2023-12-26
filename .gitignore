@@ -38,6 +38,4 @@ build/
 ### ENV ###
 .env
 
-application.properties
 
-mvnw
