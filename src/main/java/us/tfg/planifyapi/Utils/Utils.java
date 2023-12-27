@@ -3,10 +3,13 @@ package us.tfg.planifyapi.Utils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
+import org.apache.tomcat.jni.Local;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.HttpUrl;
@@ -88,18 +91,21 @@ public class Utils {
         return "";
     }
     
+    
     /**
-    * Generates a daily report based on the given filename.
-    * The report includes the number of API calls made on that day.
+    * Generates a daily report based on the content of a file.
+    * The report includes the current date, the number of API calls, and saves it to a file.
     *
-    * @param filename the name of the file used to generate the report
+    * @param filePathRead The path of the file to read the content from.
     */
-    public static void generateDailyReport(String filename) {
+    public static void generateDailyReport(String filePathRead) {
+        String filename = LocalDate.now().toString();
         String fileRoute = String.format("src/main/resources/report/%s-report.md", filename);
-        String content = readFile(fileRoute);
+        String content = readFile(filePathRead);
         Pattern patternNumCall = Pattern.compile("#\\d+");
         String numCalls = String.valueOf(patternNumCall.matcher(content).results().count());
         String report = String.format("# Reporte del día %s ## Número de llamadas a la API \n%s", filename, numCalls);
+        writeFile(fileRoute, report);
         System.out.println("Reporte generado: \n" + report);
     }
     
