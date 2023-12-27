@@ -38,4 +38,5 @@ build/
 ### ENV ###
 .env
 
-
+### Reports ###
+src/main/resources/**
