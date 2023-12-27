@@ -8,6 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import io.github.cdimascio.dotenv.Dotenv;
+import okhttp3.HttpUrl;
+import okhttp3.HttpUrl.Builder;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
 public class Utils {
     
     /**
@@ -96,6 +102,31 @@ public class Utils {
         String numCalls = String.valueOf(patternNumCall.matcher(content).results().count());
         String report = String.format("# Reporte del día %s ## Número de llamadas a la API \n%s", filename, numCalls);
         System.out.println("Reporte generado: \n" + report);
+    }
+    
+    /**
+    * Builds a Request object with the specified parameters.
+    *
+    * @param nameApiKeyEnv the name of the API key environment variable
+    * @param urlString the URL string
+    * @param query the query parameter
+    * @return a Request object
+    */
+    public static Request buildRequest(String nameApiKeyEnv, String urlString, String query) {
+        Dotenv dotenv = Dotenv.configure().load();
+        String apiKey = dotenv.get(nameApiKeyEnv);
+        Builder urlBuilder = HttpUrl.parse(urlString).newBuilder();
+        urlBuilder.addQueryParameter("key", apiKey);
+        urlBuilder.addQueryParameter("part", "snippet");
+        urlBuilder.addQueryParameter("q", query); 
+        
+        String url = urlBuilder.build().toString();
+        
+        Request request = new Request.Builder()
+        .url(url)
+        .build();
+        
+        return request;
     }
     
 }
