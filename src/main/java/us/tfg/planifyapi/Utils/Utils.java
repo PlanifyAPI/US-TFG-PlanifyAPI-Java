@@ -9,8 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import org.apache.tomcat.jni.Local;
-
 import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.HttpUrl;
 import okhttp3.HttpUrl.Builder;
@@ -104,7 +102,7 @@ public class Utils {
         String content = readFile(filePathRead);
         Pattern patternNumCall = Pattern.compile("#\\d+");
         String numCalls = String.valueOf(patternNumCall.matcher(content).results().count());
-        String report = String.format("# Reporte del día %s ## Número de llamadas a la API \n%s", filename, numCalls);
+        String report = String.format("# Reporte del día %s\n ## Número de llamadas a la API \n%s", filename, numCalls);
         writeFile(fileRoute, report);
         System.out.println("Reporte generado: \n" + report);
     }
