@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.HttpUrl;
 import okhttp3.HttpUrl.Builder;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public class Utils {

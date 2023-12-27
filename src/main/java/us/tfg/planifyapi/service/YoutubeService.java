@@ -8,7 +8,7 @@ import us.tfg.planifyapi.api.YoutubeApi;
 
 @Service
 public class YoutubeService {
-
+    
     public String fetchYoutubeData(String rateLimit) {
         Pattern pattern = Pattern.compile("(\\d+)/(\\d+)");
         Matcher matcher = pattern.matcher(rateLimit);
@@ -16,11 +16,7 @@ public class YoutubeService {
         if (matcher.find()) {
             numCalls = Integer.parseInt(matcher.group(1));
         }
-        
-        for(int i = 0; i < numCalls; i++) {
-            YoutubeApi.callYoutube("cancion de navidad", i + 1);
-            System.out.println("Llamada a la API de YouTube #" + (i + 1) + " realizada");
-        }
+        YoutubeApi.callYoutube("Navidad", numCalls);
         return "Datos de YouTube obtenidos";
     }
 }
