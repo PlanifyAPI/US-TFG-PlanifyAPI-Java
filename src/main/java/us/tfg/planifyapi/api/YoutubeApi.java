@@ -62,13 +62,14 @@ public class YoutubeApi {
                         System.out.println("Hora actual: " + timeNow);
                         System.out.println("Hora de renovación de la cuota: " + TIME_RENEW_QUOTA);
                         Long durationRenew = Duration.between(timeNow, TIME_RENEW_QUOTA).toMillis();
-                        System.out.println("Esperando " + durationRenew + " milisegundos hasta renovar la cuota");
+                        System.out.println("Esperando " + Duration.ofMillis(durationRenew).toHours() + " horas hasta renovar la cuota");
                         Utils.generateDailyReport(filePath);
                         Thread.sleep(durationRenew);
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Utils.errorHandler(e);
+                System.out.println("Archivo de error generado.");
             }
         }
     }

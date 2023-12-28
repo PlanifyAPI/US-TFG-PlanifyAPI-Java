@@ -16,6 +16,8 @@ import okhttp3.Request;
 
 public class Utils {
     
+    private static final String FILE_PATH_ERROR = "src/main/resources/report/error";
+    
     /**
     * Creates a new file at the specified file path.
     * If the file already exists, no action is taken.
@@ -84,7 +86,7 @@ public class Utils {
             return content;
             
         } catch (Exception e) {
-            e.printStackTrace();
+            errorHandler(e);
         }
         return "";
     }
@@ -130,6 +132,14 @@ public class Utils {
         .build();
         
         return request;
+    }
+    
+    public static void errorHandler(Exception e) {
+        String trace = String.valueOf(e.getMessage());
+        String timeError = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        Utils.createFile(String.format("%s/error%s.md", FILE_PATH_ERROR, timeError));
+        Utils.writeFile(String.format("%s/error%s.md", FILE_PATH_ERROR, timeError), trace);
+        System.out.println("ERROR: Archivo de error generado.");
     }
     
 }
